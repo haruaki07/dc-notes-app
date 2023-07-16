@@ -10,6 +10,7 @@
     "format": "prettier src/**/*.{js,jsx} -w"
   },
   "dependencies": {
+    "@radix-ui/colors": "^1.0.0",
     "@stitches/react": "^1.2.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
