@@ -2,7 +2,7 @@ import { createStitches } from "@stitches/react"
 import { themeCommon } from "./theme"
 import * as Stitches from "@stitches/react"
 
-export const { styled, getCssText, theme, config, css, keyframes } =
+export const { styled, getCssText, theme, config, css, keyframes, globalCss } =
   createStitches({
     theme: {
       ...themeCommon,
@@ -127,6 +127,19 @@ export const { styled, getCssText, theme, config, css, keyframes } =
       }),
     },
   })
+
+export const applyGlobalStyles = globalCss({
+  "html, body, #root": {
+    width: "$full",
+    height: "$full",
+  },
+  "#root": {
+    backgroundColor: "white",
+  },
+  "#root *": {
+    fontFamily: "$body",
+  },
+})
 
 /**
  * @typedef {import("@stitches/react").CSS<typeof config>} CSS

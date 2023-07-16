@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "checkJs": false,
+    "resolveJsonModule": true,
+    "moduleResolution": "node",
+    "target": "ES6",
+    "module": "ESNext",
+    "baseUrl": "src",
+    "paths": {
+      "@/*": ["./*"] // relative to baseUrl
+    }
+  },
+  "include": ["./src/**/*.js", "./src/**/*.jsx"]
+}
