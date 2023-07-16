@@ -1,0 +1,7 @@
+{
+  "tabWidth": 2,
+  "useTabs": false,
+  "endOfLine": "lf",
+  "semi": false,
+  "plugins": ["prettier-plugin-jsdoc"]
+}
