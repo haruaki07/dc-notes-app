@@ -20,7 +20,7 @@ class NotesPage extends React.Component {
     /** @type {State} */
     // Kriteria 1 No. 1 dan 2; Kriteria 2 No. 3 dan 4
     this.state = {
-      notes: getInitialNotes(),
+      notes: getInitialNotes().filter((n) => !n.archived),
     }
   }
 
