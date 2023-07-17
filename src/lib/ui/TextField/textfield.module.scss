@@ -1,0 +1,70 @@
+.input {
+  background: $colors-gray4;
+  border: $colors-gray4 solid 1px;
+  border-radius: $radii-sm;
+
+  &:focus {
+    background: white;
+    outline: none;
+    box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.25);
+  }
+
+  &::placeholder {
+    color: $colors-gray11;
+  }
+
+  &.inputSm {
+    border-radius: $radii-xs;
+    font-size: $fontSizes-xs;
+    padding: $space-4;
+  }
+
+  &.inputMd {
+    font-size: $fontSizes-sm;
+    padding: $space-6;
+  }
+
+  &.inputLg {
+    font-size: $fontSizes-md;
+    padding: $space-6 $space-8;
+  }
+}
+
+.inputWrapper {
+  position: relative;
+
+  &.inputfullWidth,
+  &.inputfullWidth .input {
+    width: 100%;
+  }
+}
+
+.inputIconWrapper {
+  position: absolute;
+  color: $colors-gray11;
+
+  &.inputSm {
+    top: $space-2;
+    left: $space-3;
+  }
+  &.inputMd {
+    top: $space-5;
+    left: $space-5;
+  }
+  &.inputLg {
+    top: $space-6;
+    left: $space-6;
+  }
+
+  & ~ .inputSm {
+    padding-left: $space-12;
+  }
+
+  & ~ .inputMd {
+    padding-left: $space-14;
+  }
+
+  & ~ .inputLg {
+    padding-left: $space-15;
+  }
+}

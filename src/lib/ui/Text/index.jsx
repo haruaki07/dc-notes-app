@@ -1,10 +1,17 @@
-import { styled } from "@/lib/stitches"
+import styles from "./text.module.scss"
+import clsx from "clsx"
 
-const Text = styled("p", {
-  fontFamily: "inherit",
-  color: "inherit",
-  fontSize: "$base",
-  lineHeight: "$base",
-})
+/**
+ * @type {React.FC<
+ *   React.PropsWithChildren<
+ *     React.HTMLAttributes<HTMLElement> & { as?: string }
+ *   >
+ * >}
+ */
+const Text = (props) => {
+  const { as: Cmp = "p", className, ...restProps } = props
+
+  return <Cmp className={clsx(styles.text, className)} {...restProps}></Cmp>
+}
 
 export default Text

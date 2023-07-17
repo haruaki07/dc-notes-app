@@ -1,59 +1,27 @@
-import { styled } from "@/lib/stitches"
-import { forwardRef, useImperativeHandle, useRef } from "react"
+import React from "react"
 import Text from "../Text"
-
-const StyledHeading = styled(Text, {
-  color: "$gray11",
-
-  variants: {
-    level: {
-      1: {
-        fontWeight: "$bold",
-        fontSize: "$3xl",
-      },
-      2: {
-        fontWeight: "$bold",
-        fontSize: "$2xl",
-      },
-      3: {
-        fontWeight: "$semibold",
-        fontSize: "$1xl",
-      },
-      4: {
-        fontWeight: "$semibold",
-        fontSize: "$xl",
-      },
-      5: {
-        fontWeight: "$medium",
-        fontSize: "$lg",
-      },
-      6: {
-        fontWeight: "$medium",
-        fontSize: "$md",
-      },
-    },
-  },
-
-  defaultVariants: {
-    level: "5",
-  },
-})
+import styles from "./heading.module.scss"
+import clsx from "clsx"
 
 /**
- * @typedef {typeof StyledHeading} StyledHeadingType
- * @type {React.ForwardRefExoticComponent<
- *   React.ComponentPropsWithoutRef<StyledHeadingType> &
- *     React.RefAttributes<StyledHeadingType>
+ * @type {React.FC<
+ *   React.PropsWithChildren<
+ *     {
+ *       level: "1" | "2" | "3" | "4" | "5" | "6"
+ *     } & React.HTMLAttributes<HTMLHeadingElement>
+ *   >
  * >}
  */
-const Heading = forwardRef((props, ref) => {
-  const headingRef = useRef(null)
+const Heading = (props) => {
+  const { level = "5", ...restProps } = props
 
-  const { level = 5, ...restProps } = props
-
-  useImperativeHandle(ref, () => headingRef.current)
-
-  return <StyledHeading as={`h${level}`} {...restProps} ref={headingRef} />
-})
+  return (
+    <Text
+      as={`h${level}`}
+      className={clsx(styles.heading, styles[`heading${level}`])}
+      {...restProps}
+    ></Text>
+  )
+}
 
 export default Heading

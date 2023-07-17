@@ -1,0 +1,45 @@
+.flex {
+  @include box-mixin;
+  display: flex;
+
+  &.flexCol {
+    flex-direction: column;
+  }
+
+  &.flexColReverse {
+    flex-direction: column-reverse;
+  }
+
+  &.flexRow {
+    flex-direction: row;
+  }
+
+  &.flexRowReverse {
+    flex-direction: row-reverse;
+  }
+
+  &.flexCenter {
+    justify-content: center;
+    align-items: center;
+  }
+
+  &.flexCol.flexCenterVertical,
+  &.flexColReverse.flexCenterVertical {
+    justify-content: center;
+  }
+
+  &.flexCol.flexCenterHorizontal,
+  &.flexColReverse.flexCenterHorizontal {
+    align-items: center;
+  }
+
+  &.flexRow.flexCenterVertical,
+  &.flexRowReverse.flexCenterVertical {
+    align-items: center;
+  }
+
+  &.flexRow.flexCenterHorizontal,
+  &.flexRowReverse.flexCenterHorizontal {
+    justify-content: center;
+  }
+}

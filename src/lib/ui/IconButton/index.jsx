@@ -1,38 +1,14 @@
-import { styled } from "@/lib/stitches"
-import { forwardRef, useImperativeHandle, useRef } from "react"
+import styles from "./iconbutton.module.scss"
 
-const StyledIconButton = styled("button", {
-  border: "none",
-  outline: "none !important",
-  background: "white",
-  color: "$gray11",
-  p: "$6",
-  rounded: "$pill",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-
-  "&:hover": {
-    background: "$gray4",
-    cursor: "pointer",
-  },
-})
-
-/**
- * @typedef {typeof StyledIconButton} StyledIconButtonType
- * @type {React.ForwardRefExoticComponent<
- *   React.ComponentPropsWithoutRef<StyledIconButtonType> &
- *     React.RefAttributes<StyledIconButtonType>
- * >}
- */
-const IconButton = forwardRef((props, ref) => {
-  const buttonRef = useRef()
-
+/** @type {React.FC<React.PropsWithChildren<React.ComponentProps<"button">>>} */
+const IconButton = (props) => {
   const { children, ...restProps } = props
 
-  useImperativeHandle(ref, () => buttonRef.current)
-
-  return <StyledIconButton children={children} {...restProps} />
-})
+  return (
+    <button type="button" className={styles.iconButton} {...restProps}>
+      {children}
+    </button>
+  )
+}
 
 export default IconButton

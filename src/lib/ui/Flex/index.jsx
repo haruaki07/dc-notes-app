@@ -1,118 +1,46 @@
-import { styled } from "@/lib/stitches"
-import Box from "../Box"
-import { forwardRef, useRef, useImperativeHandle } from "react"
+import clsx from "clsx"
+import React, { forwardRef } from "react"
+import styles from "./flex.module.scss"
 
-const StyledFlex = styled(Box, {
-  display: "flex",
-  variants: {
-    dir: {
-      row: {
-        flexDirection: "row",
-      },
-      "row-reverse": {
-        flexDirection: "row-reverse",
-      },
-      col: {
-        flexDirection: "column",
-      },
-      "col-reverse": {
-        flexDirection: "column",
-      },
-    },
-    center: {
-      horizontal: {},
-      vertical: {},
-      true: {
-        alignItems: "center",
-        justifyContent: "center",
-      },
-    },
-  },
+const flexDirectionStyle = {
+  col: styles.flexCol,
+  "col-reverse": styles.flexColReverse,
+  row: styles.flexRow,
+  "row-reverse": styles.flexRowReverse,
+}
 
-  compoundVariants: [
-    {
-      center: "horizontal",
-      dir: "col",
-      css: {
-        alignItems: "center",
-      },
-    },
-    {
-      center: "vertical",
-      dir: "col",
-      css: {
-        justifyContent: "center",
-      },
-    },
-    {
-      center: "horizontal",
-      dir: "col-reverse",
-      css: {
-        alignItems: "center",
-      },
-    },
-    {
-      center: "vertical",
-      dir: "col-reverse",
-      css: {
-        justifyContent: "center",
-      },
-    },
-    {
-      center: "vertical",
-      dir: "row",
-      css: {
-        alignItems: "center",
-      },
-    },
-    {
-      center: "horizontal",
-      dir: "row",
-      css: {
-        justifyContent: "center",
-      },
-    },
-    {
-      center: "vertical",
-      dir: "row-reverse",
-      css: {
-        alignItems: "center",
-      },
-    },
-    {
-      center: "horizontal",
-      dir: "row-reverse",
-      css: {
-        justifyContent: "center",
-      },
-    },
-  ],
-
-  defaultVariants: {
-    dir: "row",
-  },
-})
+const flexCenterStyle = {
+  vertical: styles.flexCenterVertical,
+  horizontal: styles.flexCenterHorizontal,
+  true: styles.flexCenter,
+}
 
 /**
- * @typedef {typeof StyledFlex} StyledFlexType
- * @type {React.ForwardRefExoticComponent<
- *  {gap?: import("@stitches/react").ScaleValue<"space">}
- *   React.ComponentPropsWithoutRef<StyledFlexType> &
- *     React.RefAttributes<StyledFlexType>
+ * @type {React.FC<
+ *   React.PropsWithChildren<
+ *     React.ComponentProps<"div"> & {
+ *       gap?: number
+ *       direction?: "row" | "row-reverse" | "col" | "col-reverse"
+ *       center?: "vertical" | "horizontal" | true
+ *     }
+ *   >
  * >}
  */
-const Flex = forwardRef((props, ref) => {
-  const flexRef = useRef()
+const Flex = (props) => {
+  const { gap, direction = "row", center, className, ...restProps } = props
 
-  useImperativeHandle(ref, () => flexRef.current)
-
-  const { gap, ...restProps } = props
-
-  if (gap) {
-    restProps.css = Object.assign(restProps.css ?? {}, { gap })
-  }
-
-  return <StyledFlex {...restProps} ref={flexRef} />
-})
+  return (
+    <div
+      className={clsx(
+        styles.flex,
+        flexDirectionStyle[direction],
+        center && flexCenterStyle[center],
+        className
+      )}
+      style={{ gap }}
+      {...restProps}
+    ></div>
+  )
+}
 
 export default Flex

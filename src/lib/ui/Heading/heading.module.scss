@@ -1,0 +1,27 @@
+.heading {
+  color: $colors-gray11;
+  &.heading1 {
+    font-weight: $fontWeights-bold;
+    font-size: $fontSizes-4xl;
+  }
+  &.heading2 {
+    font-weight: $fontWeights-bold;
+    font-size: $fontSizes-3xl;
+  }
+  &.heading3 {
+    font-weight: $fontWeights-semibold;
+    font-size: $fontSizes-2xl;
+  }
+  &.heading4 {
+    font-weight: $fontWeights-semibold;
+    font-size: $fontSizes-xl;
+  }
+  &.heading5 {
+    font-weight: $fontWeights-medium;
+    font-size: $fontSizes-lg;
+  }
+  &.heading6 {
+    font-weight: $fontWeights-medium;
+    font-size: $fontSizes-md;
+  }
+}
