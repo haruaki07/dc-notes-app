@@ -2,6 +2,10 @@
   @include box-mixin;
   display: flex;
 
+  &.flexInline {
+    display: inline-flex;
+  }
+
   &.flexCol {
     flex-direction: column;
   }

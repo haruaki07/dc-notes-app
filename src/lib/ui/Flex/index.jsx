@@ -18,7 +18,9 @@ const flexCenterStyle = {
 /**
  * @type {React.FC<
  *   React.PropsWithChildren<
- *     React.ComponentProps<"div"> & {
+ *     React.ComponentProps<HTMLElement> & {
+ *       as?: string;
+ *       inline?: boolean
  *       gap?: number
  *       direction?: "row" | "row-reverse" | "col" | "col-reverse"
  *       center?: "vertical" | "horizontal" | true
@@ -27,19 +29,28 @@ const flexCenterStyle = {
  * >}
  */
 const Flex = (props) => {
-  const { gap, direction = "row", center, className, ...restProps } = props
+  const {
+    as: Cmp = "div",
+    inline,
+    gap,
+    direction = "row",
+    center,
+    className,
+    ...restProps
+  } = props
 
   return (
-    <div
+    <Cmp
       className={clsx(
         styles.flex,
+        inline && styles.flexInline,
         flexDirectionStyle[direction],
         center && flexCenterStyle[center],
         className
       )}
       style={{ gap }}
       {...restProps}
-    ></div>
+    ></Cmp>
   )
 }
 
