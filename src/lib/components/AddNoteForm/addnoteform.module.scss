@@ -1,0 +1,70 @@
+.wrapper {
+  padding: $space-12 0;
+  width: 100%;
+
+  .form {
+    width: 100%;
+    max-width: 480px;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
+    border-radius: $radii-sm;
+    overflow: hidden;
+    background: white;
+    padding: 0 $space-6;
+
+    @media screen and (min-width: $breakpoints-sm) {
+      max-width: 620px;
+    }
+
+    .inputTitle {
+      input {
+        font-weight: $fontWeights-medium;
+        padding-left: 0;
+        padding-right: 0;
+        border-radius: 0;
+
+        &::placeholder {
+          font-weight: $fontWeights-medium;
+        }
+      }
+    }
+
+    .inputBody {
+      textarea {
+        padding-left: 0;
+        padding-right: 0;
+        border-radius: 0;
+      }
+    }
+
+    &.formFocused {
+      box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.4);
+      padding-bottom: $space-3;
+    }
+
+    .btnAdd {
+      margin-left: auto;
+      display: block;
+      cursor: pointer;
+      border-radius: $radii-xs;
+      padding: $space-5 $space-10;
+      font-size: $fontSizes-sm;
+      background: transparent;
+      border: none;
+      color: hsl(0, 0%, 25%);
+      font-weight: $fontWeights-medium;
+
+      &:hover {
+        background: $colors-gray2;
+      }
+
+      &:active {
+        background: $colors-gray4;
+      }
+
+      &:focus-visible {
+        outline: $colors-gray9 solid 1px;
+        outline-offset: -1px;
+      }
+    }
+  }
+}

@@ -1,10 +1,10 @@
 import AppLayout from "./lib/layouts/AppLayout"
-import Container from "./lib/ui/Container"
+import NotesPage from "./pages/NotesPage"
 
 function App() {
   return (
     <AppLayout>
-      <Container center>haiyaaa</Container>
+      <NotesPage />
     </AppLayout>
   )
 }
