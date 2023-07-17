@@ -20,7 +20,11 @@ class AddNoteForm extends React.Component {
   constructor(props) {
     super(props)
 
-    /** @type {FormState} */
+    /**
+     * Kriteria 2 No. 2
+     *
+     * @type {FormState}
+     */
     this.state = {
       title: "",
       body: "",
@@ -28,7 +32,11 @@ class AddNoteForm extends React.Component {
     }
   }
 
-  handleBlur = (e) => {
+  handleFormFocus = () => {
+    this.setState({ expand: true })
+  }
+
+  handleFormBlur = (e) => {
     const { title, body } = this.state
     const isDirty = title.trim().length > 0 || body.trim().length > 0
     if (!e.currentTarget.contains(e.relatedTarget) && !isDirty) {
@@ -46,10 +54,6 @@ class AddNoteForm extends React.Component {
     this.setState({ body: e.currentTarget.value })
   }
 
-  handleFocus = () => {
-    this.setState({ expand: true })
-  }
-
   render() {
     const { title, body, expand } = this.state
 
@@ -57,8 +61,8 @@ class AddNoteForm extends React.Component {
       <Flex center className={styles.wrapper}>
         <div
           className={clsx(styles.form, expand && styles.formFocused)}
-          onFocus={this.handleFocus}
-          onBlur={this.handleBlur}
+          onFocus={this.handleFormFocus}
+          onBlur={this.handleFormBlur}
         >
           {expand && (
             <TextField

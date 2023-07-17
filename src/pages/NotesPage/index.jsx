@@ -1,6 +1,7 @@
 import AddNoteForm from "@/lib/components/AddNoteForm"
 import NoteList from "@/lib/components/NoteList"
 import Container from "@/lib/ui/Container"
+import Flex from "@/lib/ui/Flex"
 import { getInitialNotes } from "@/utils"
 import React from "react"
 
@@ -17,6 +18,7 @@ class NotesPage extends React.Component {
     super(props)
 
     /** @type {State} */
+    // Kriteria 1 No. 1 dan 2; Kriteria 2 No. 3 dan 4
     this.state = {
       notes: getInitialNotes(),
     }
@@ -24,12 +26,12 @@ class NotesPage extends React.Component {
 
   render() {
     return (
-      <>
+      <Flex center="horisontal" direction="col" style={{ height: "100%" }}>
         <AddNoteForm />
-        <Container center>
+        <Container center style={{ flexGrow: 1 }}>
           <NoteList notes={this.state.notes} />
         </Container>
-      </>
+      </Flex>
     )
   }
 }

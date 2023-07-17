@@ -23,10 +23,12 @@ const NoteCard = (props) => {
         <Text className={styles.noteBody}>{body}</Text>
       </div>
       <Flex className={styles.noteActions}>
+        {/* Kriteria 3 No. 1 */}
         <IconButton size="sm" title="Delete" color="red">
           <IconTrash />
         </IconButton>
 
+        {/* Kriteria Ops. 3 */}
         <IconButton size="sm" title="Archive">
           <IconArchive size={18} />
         </IconButton>

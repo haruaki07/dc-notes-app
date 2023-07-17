@@ -13,12 +13,12 @@ import clsx from "clsx"
  * >}
  */
 const Heading = (props) => {
-  const { level = "5", ...restProps } = props
+  const { level = "5", className, ...restProps } = props
 
   return (
     <Text
       as={`h${level}`}
-      className={clsx(styles.heading, styles[`heading${level}`])}
+      className={clsx(styles.heading, styles[`heading${level}`], className)}
       {...restProps}
     ></Text>
   )
