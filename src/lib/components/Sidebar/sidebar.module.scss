@@ -1,11 +1,27 @@
 .sidebarWrapper {
   display: block;
 
-  div:first-child {
+  > div:first-child {
     flex-shrink: 1;
     background: transparent;
     min-width: 280px;
     position: relative;
+  }
+}
+
+.sidebarExpanded {
+  > div:first-child {
+    min-width: calc(48px + $space-6);
+  }
+
+  .sidebar {
+    width: calc(48px + $space-6);
+    padding-left: $space-6;
+
+    .sidebarItem {
+      padding: 0;
+      border-radius: $radii-pill;
+    }
   }
 }
 
@@ -18,7 +34,7 @@
   overflow-y: auto;
   background: white;
   padding-top: 8px;
-  cursor: pointer;
+  transition: width 150ms;
 
   .sidebarItem {
     width: 100%;
@@ -30,6 +46,7 @@
     border-top-right-radius: $radii-pill;
     border-bottom-right-radius: $radii-pill;
     cursor: pointer;
+    transition: border-radius 150ms;
 
     &:focus-visible {
       outline: $colors-gray9 solid 1px;
@@ -49,6 +66,7 @@
     }
 
     .sidebarItemIcon {
+      flex-shrink: 0;
       width: $sizes-16;
       height: $sizes-16;
       color: $colors-gray11;

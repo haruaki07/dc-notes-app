@@ -9,7 +9,12 @@ import IconMenu from "../Icons/Menu"
 import LogoImg from "./LogoImg"
 import styles from "./navbar.module.scss"
 
-const Navbar = () => {
+/**
+ * @type {React.FC<{
+ *   onSidebarToggle: (value: boolean) => void
+ * }>}
+ */
+const Navbar = ({ onSidebarToggle }) => {
   const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
@@ -23,7 +28,7 @@ const Navbar = () => {
   return (
     <div className={clsx(styles.navbarRoot, scrolled && styles.scrolled)}>
       <Flex center="vertical" gap="0.75rem">
-        <IconButton>
+        <IconButton onClick={onSidebarToggle}>
           <IconMenu />
         </IconButton>
         <a className={styles.navbarLogo} href="/">

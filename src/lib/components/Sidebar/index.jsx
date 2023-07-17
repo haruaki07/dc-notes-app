@@ -19,7 +19,12 @@ const SIDEBAR_ITEMS = [
   },
 ]
 
-const Sidebar = () => {
+/**
+ * @type {React.FC<{
+ *   expand: boolean
+ * }>}
+ */
+const Sidebar = ({ expand }) => {
   const [activeItem, setActiveItem] = useState("notes")
 
   /** @param {(typeof SIDEBAR_ITEMS)[0]} item */
@@ -28,22 +33,28 @@ const Sidebar = () => {
   }
 
   return (
-    <div className={styles.sidebarWrapper}>
+    <div
+      className={clsx(styles.sidebarWrapper, expand && styles.sidebarExpanded)}
+    >
       <div></div>
       <div className={styles.sidebar}>
         {SIDEBAR_ITEMS.map((item) => (
           <button
+            key={item.value}
             type="button"
             className={clsx(
               styles.sidebarItem,
               activeItem === item.value && styles.sidebarItemActive
             )}
             onClick={() => handleItemClick(item)}
+            title={item.text}
           >
             <Flex as="span" center className={styles.sidebarItemIcon}>
               {item.icon}
             </Flex>
-            <Text className={styles.sidebarItemText}>{item.text}</Text>
+            {!expand && (
+              <Text className={styles.sidebarItemText}>{item.text}</Text>
+            )}
           </button>
         ))}
       </div>
