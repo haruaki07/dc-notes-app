@@ -6,6 +6,7 @@ import Flex from "@/lib/ui/Flex"
 import IconButton from "@/lib/ui/IconButton"
 import IconArchive from "../Icons/Archive"
 import IconTrash from "../Icons/Trash"
+import IconUnarchive from "../Icons/Unarchive"
 
 /** @type {React.FC<import("@/utils").Note>} */
 const NoteCard = (props) => {
@@ -29,9 +30,15 @@ const NoteCard = (props) => {
         </IconButton>
 
         {/* Kriteria Ops. 3 */}
-        <IconButton size="sm" title="Archive">
-          <IconArchive size={18} />
-        </IconButton>
+        {archived ? (
+          <IconButton size="sm" title="Unarchive">
+            <IconUnarchive size={18} />
+          </IconButton>
+        ) : (
+          <IconButton size="sm" title="Archive">
+            <IconArchive size={18} />
+          </IconButton>
+        )}
       </Flex>
     </div>
   )
