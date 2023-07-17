@@ -4,23 +4,24 @@
   > div:first-child {
     flex-shrink: 1;
     background: transparent;
-    min-width: 280px;
+    min-width: calc(48px + $space-6);
     position: relative;
   }
 }
 
 .sidebarExpanded {
   > div:first-child {
-    min-width: calc(48px + $space-6);
+    min-width: 280px;
   }
 
   .sidebar {
-    width: calc(48px + $space-6);
-    padding-left: $space-6;
+    width: 280px;
+    padding-left: 0;
 
     .sidebarItem {
-      padding: 0;
-      border-radius: $radii-pill;
+      padding: 0 0 0 $space-6;
+      border-top-right-radius: $radii-pill;
+      border-bottom-right-radius: $radii-pill;
     }
   }
 }
@@ -29,11 +30,12 @@
   position: fixed;
   left: 0;
   top: 64px;
-  width: 280px;
+  width: calc(48px + $space-6);
   height: 100%;
   overflow-y: auto;
   background: white;
   padding-top: 8px;
+  padding-left: $space-6;
   transition: width 150ms;
 
   .sidebarItem {
@@ -42,9 +44,8 @@
     align-items: center;
     background: white;
     border: none;
-    padding: 0 0 0 $space-6;
-    border-top-right-radius: $radii-pill;
-    border-bottom-right-radius: $radii-pill;
+    padding: 0;
+    border-radius: $radii-pill;
     cursor: pointer;
     transition: border-radius 150ms;
 

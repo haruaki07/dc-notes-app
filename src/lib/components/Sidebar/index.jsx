@@ -52,7 +52,7 @@ const Sidebar = ({ expand }) => {
             <Flex as="span" center className={styles.sidebarItemIcon}>
               {item.icon}
             </Flex>
-            {!expand && (
+            {expand && (
               <Text className={styles.sidebarItemText}>{item.text}</Text>
             )}
           </button>
