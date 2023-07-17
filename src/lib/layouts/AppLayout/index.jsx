@@ -6,7 +6,7 @@ import styles from "./applayout.module.scss"
 import clsx from "clsx"
 
 /**
- * @typedef {{ sidebarExpand: boolean }} State
+ * @typedef {{ sidebarExpand: boolean; page: "notes" | "archive" }} State
  *
  * @typedef {React.PropsWithChildren} Props
  */
@@ -20,6 +20,7 @@ class AppLayout extends React.Component {
     /** @type {State} */
     this.state = {
       sidebarExpand: window.innerWidth < 650 ? false : true,
+      page: "notes",
     }
   }
 
@@ -32,14 +33,18 @@ class AppLayout extends React.Component {
       <Flex className={styles.root}>
         <Navbar onSidebarToggle={this.handleToggleSidebar} />
         <div className={styles.main}>
-          <Sidebar expand={this.state.sidebarExpand} />
+          <Sidebar
+            expand={this.state.sidebarExpand}
+            active={this.state.page}
+            onChange={(page) => this.setState({ page })}
+          />
           <div
             className={clsx(
               styles.mainContent,
               this.state.sidebarExpand && styles.mainContentExpand
             )}
           >
-            {this.props.children}
+            {this.props.children({ page: this.state.page })}
           </div>
         </div>
       </Flex>

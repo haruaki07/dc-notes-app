@@ -22,14 +22,17 @@ const SIDEBAR_ITEMS = [
 /**
  * @type {React.FC<{
  *   expand: boolean
+ *   active: "notes" | "archive"
+ *   onChange?: (value: string) => void
  * }>}
  */
-const Sidebar = ({ expand }) => {
-  const [activeItem, setActiveItem] = useState("notes")
+const Sidebar = ({ expand, active, onChange }) => {
+  const [activeItem, setActiveItem] = useState(active)
 
   /** @param {(typeof SIDEBAR_ITEMS)[0]} item */
   const handleItemClick = (item) => {
     setActiveItem(item.value)
+    onChange?.(item.value)
   }
 
   return (

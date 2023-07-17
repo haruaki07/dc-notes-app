@@ -1,12 +1,12 @@
-import AddNoteForm from "@/lib/components/AddNoteForm"
+import IconNote from "@/lib/components/Icons/Note"
 import NoteList from "@/lib/components/NoteList"
 import Container from "@/lib/ui/Container"
 import Flex from "@/lib/ui/Flex"
+import Heading from "@/lib/ui/Heading"
 import { getInitialNotes } from "@/utils"
 import React from "react"
-import styles from "./notespage.module.scss"
-import IconNote from "@/lib/components/Icons/Note"
-import Heading from "@/lib/ui/Heading"
+import styles from "./archivepage.module.scss"
+import IconArchive from "@/lib/components/Icons/Archive"
 
 /**
  * @typedef {{ notes: import("@/utils").Note[] }} State
@@ -15,31 +15,29 @@ import Heading from "@/lib/ui/Heading"
  */
 
 /** @extends {React.Component<Props, State>} */
-class NotesPage extends React.Component {
+class ArchivePage extends React.Component {
   /** @param {Props} props */
   constructor(props) {
     super(props)
 
     /** @type {State} */
-    // Kriteria 1 No. 1 dan 2; Kriteria 2 No. 3 dan 4
     this.state = {
-      notes: getInitialNotes().filter((n) => !n.archived),
+      notes: getInitialNotes().filter((n) => n.archived),
     }
   }
 
   render() {
     return (
       <Flex center="horizontal" direction="col" style={{ height: "100%" }}>
-        <AddNoteForm />
-        <Container center style={{ flexGrow: 1, paddingBottom: "1rem" }}>
+        <Container center style={{ flexGrow: 1, padding: "1rem 0" }}>
           {/* Kriteria 3 No. 3 */}
           {this.state.notes.length > 0 ? (
             <NoteList notes={this.state.notes} />
           ) : (
             <Flex center direction="col" className={styles.notesEmpty}>
-              <IconNote size={128} />
+              <IconArchive size={128} />
               <Heading level="3" className={styles.notesEmptyText}>
-                Notes you add appear here
+                Your archived notes appear here
               </Heading>
             </Flex>
           )}
@@ -49,4 +47,4 @@ class NotesPage extends React.Component {
   }
 }
 
-export default NotesPage
+export default ArchivePage

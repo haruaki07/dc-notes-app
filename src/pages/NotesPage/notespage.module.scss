@@ -1,0 +1,12 @@
+.notesEmpty {
+  height: 100%;
+  color: $colors-gray5;
+  margin-top: -$space-12;
+
+  &Text {
+    margin-top: $space-8;
+    color: $colors-gray10;
+    font-weight: $fontWeights-normal !important;
+    cursor: default;
+  }
+}

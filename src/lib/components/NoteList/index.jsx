@@ -1,10 +1,6 @@
-import React, { createRef } from "react"
-import NoteCard from "../NoteCard"
+import React from "react"
 import Masonry from "react-masonry-list"
-import styles from "./notelist.module.scss"
-import Flex from "@/lib/ui/Flex"
-import IconNote from "../Icons/Note"
-import Heading from "@/lib/ui/Heading"
+import NoteCard from "../NoteCard"
 
 /**
  * @typedef {{
@@ -56,21 +52,8 @@ class NoteList extends React.Component {
   }
 
   render() {
-    // Kriteria 3 No 3
-    if (this.state.notes.length < 1) {
-      return (
-        <Flex center direction="col" className={styles.noteListEmpty}>
-          <IconNote size={128} />
-          <Heading level="3" className={styles.noteListEmptyText}>
-            Notes you add appear here
-          </Heading>
-        </Flex>
-      )
-    }
-
     return (
       <Masonry
-        className={styles.noteList}
         minWidth={80}
         colCount={this.state.column}
         // Kriteria 1 No. 3
