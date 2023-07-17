@@ -1,17 +1,20 @@
 import AddNoteForm from "@/lib/components/AddNoteForm"
+import IconNote from "@/lib/components/Icons/Note"
 import NoteList from "@/lib/components/NoteList"
 import Container from "@/lib/ui/Container"
 import Flex from "@/lib/ui/Flex"
-import { getInitialNotes } from "@/utils"
+import Heading from "@/lib/ui/Heading"
 import React from "react"
 import styles from "./notespage.module.scss"
-import IconNote from "@/lib/components/Icons/Note"
-import Heading from "@/lib/ui/Heading"
+import { dequal } from "dequal"
 
 /**
  * @typedef {{ notes: import("@/utils").Note[] }} State
  *
- * @typedef {{}} Props
+ * @typedef {{
+ *   notes: import("@/utils").Note[]
+ *   onAddNote: (values: Pick<import("@/utils").Note, "title" | "body">) => void
+ * }} Props
  */
 
 /** @extends {React.Component<Props, State>} */
@@ -20,17 +23,23 @@ class NotesPage extends React.Component {
   constructor(props) {
     super(props)
 
-    /** @type {State} */
-    // Kriteria 1 No. 1 dan 2; Kriteria 2 No. 3 dan 4
     this.state = {
-      notes: getInitialNotes().filter((n) => !n.archived),
+      notes: props.notes,
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (!dequal(prevProps.notes, this.props.notes)) {
+      this.setState({
+        notes: this.props.notes,
+      })
     }
   }
 
   render() {
     return (
       <Flex center="horizontal" direction="col" style={{ height: "100%" }}>
-        <AddNoteForm />
+        <AddNoteForm onAdd={this.props.onAddNote} />
         <Container center style={{ flexGrow: 1, paddingBottom: "1rem" }}>
           {/* Kriteria 3 No. 3 */}
           {this.state.notes.length > 0 ? (

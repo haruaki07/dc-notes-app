@@ -1,6 +1,7 @@
 import React from "react"
 import Masonry from "react-masonry-list"
 import NoteCard from "../NoteCard"
+import { dequal } from "dequal"
 
 /**
  * @typedef {{
@@ -28,6 +29,14 @@ class NoteList extends React.Component {
 
   componentDidMount() {
     window.addEventListener("resize", this.handleResize)
+  }
+
+  componentDidUpdate(prevProps) {
+    if (!dequal(prevProps.notes, this.props.notes)) {
+      this.setState({
+        notes: this.props.notes,
+      })
+    }
   }
 
   componentWillUnmount() {

@@ -5,13 +5,17 @@ import TextField from "@/lib/ui/TextField"
 import clsx from "clsx"
 
 /**
+ * @typedef {{ title: string; body: string }} Values
+ *
  * @typedef {{
  *   title: string
  *   body: string
  *   expand: boolean
  * }} FormState
  *
- * @typedef {{}} FormProps
+ * @typedef {{
+ *   onAdd: (values: Values) => void
+ * }} FormProps
  */
 
 /** @extends {React.Component<FormProps, FormState>} */
@@ -54,6 +58,11 @@ class AddNoteForm extends React.Component {
     this.setState({ body: e.currentTarget.value })
   }
 
+  handleBtnAdd = () => {
+    this.props.onAdd?.({ title: this.state.title, body: this.state.body })
+    this.setState({ title: "", body: "" })
+  }
+
   render() {
     const { title, body, expand } = this.state
 
@@ -88,7 +97,11 @@ class AddNoteForm extends React.Component {
           />
           {expand && (
             <>
-              <button type="button" className={styles.btnAdd}>
+              <button
+                type="button"
+                className={styles.btnAdd}
+                onClick={this.handleBtnAdd}
+              >
                 Add
               </button>
             </>

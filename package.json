@@ -13,6 +13,7 @@
     "@radix-ui/colors": "^1.0.0",
     "autosize": "^6.0.1",
     "clsx": "^2.0.0",
+    "dequal": "^2.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-masonry-list": "^1.0.4"
