@@ -41,6 +41,8 @@ const Navbar = ({ onSidebarToggle }) => {
         placeholder="Search"
         icon={<IconSearch />}
         size="lg"
+        fullWidth
+        className={styles.navbarSearch}
       />
     </div>
   )

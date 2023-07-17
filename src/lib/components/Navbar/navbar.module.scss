@@ -2,7 +2,6 @@
   display: flex;
   flex-shrink: 0;
   align-items: center;
-  justify-content: space-between;
   position: fixed;
   top: 0;
   left: 0;
@@ -20,10 +19,20 @@
   .navbarLogo {
     display: flex;
     align-items: center;
+    flex-shrink: 0;
     text-decoration: none;
 
+    svg {
+      margin-right: $space-8;
+    }
+
     h5 {
-      margin-left: $space-8;
+      padding-right: $space-16;
+      display: none;
+
+      @media screen and (min-width: $breakpoints-xs) {
+        display: block;
+      }
     }
 
     &:hover {
@@ -31,6 +40,17 @@
         text-decoration: underline;
         text-decoration-thickness: $sizes-1;
       }
+    }
+  }
+
+  .navbarSearch {
+    flex-grow: 1;
+    max-width: 200px;
+    margin-left: auto;
+
+    @media screen and (min-width: $breakpoints-sm) {
+      max-width: 400px;
+      margin: 0;
     }
   }
 }

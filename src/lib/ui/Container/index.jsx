@@ -1,7 +1,7 @@
 import clsx from "clsx"
 import styles from "./container.module.scss"
 
-/** @type {React.FC<React.ComponentProps<HTMLDivElement> & { center?: boolean }>>} */
+/** @type {React.FC<React.ComponentProps<"div"> & { center?: boolean }>>} */
 const Container = ({ children, center, className, ...restProps }) => {
   return (
     <div

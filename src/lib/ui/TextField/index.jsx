@@ -20,11 +20,21 @@ const inputSizeStyle = {
  * >}
  */
 const TextField = (props) => {
-  const { icon, fullWidth = false, size = "md", ...restProps } = props
+  const {
+    icon,
+    fullWidth = false,
+    size = "md",
+    className,
+    ...restProps
+  } = props
 
   return (
     <div
-      className={clsx(styles.inputWrapper, fullWidth && styles.inputfullWidth)}
+      className={clsx(
+        styles.inputWrapper,
+        fullWidth && styles.inputfullWidth,
+        className
+      )}
     >
       {icon && (
         <div className={clsx(styles.inputIconWrapper, inputSizeStyle[size])}>
