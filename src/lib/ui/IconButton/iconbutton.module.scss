@@ -3,7 +3,6 @@
   outline: none !important;
   background: white;
   color: $colors-gray11;
-  padding: $space-6;
   border-radius: $radii-pill;
   display: flex;
   align-items: center;
@@ -12,5 +11,22 @@
   &:hover {
     background: $colors-gray4;
     cursor: pointer;
+  }
+
+  &.iconButtonRed {
+    color: $colors-red10;
+    &:hover {
+      background: $colors-red4;
+    }
+  }
+
+  &.iconButtonSm {
+    width: 34px;
+    height: 34px;
+  }
+
+  &.iconButtonMd {
+    width: 48px;
+    height: 48px;
   }
 }

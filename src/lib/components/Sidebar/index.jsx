@@ -36,7 +36,6 @@ const Sidebar = ({ expand }) => {
     <div
       className={clsx(styles.sidebarWrapper, expand && styles.sidebarExpanded)}
     >
-      <div></div>
       <div className={styles.sidebar}>
         {SIDEBAR_ITEMS.map((item) => (
           <button

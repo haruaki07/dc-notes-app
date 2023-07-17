@@ -1,0 +1,45 @@
+.noteCard {
+  display: flex;
+  flex-direction: column;
+  padding: $space-2;
+  border: $colors-gray6 1px solid;
+  width: 100%;
+  border-radius: $radii-sm;
+
+  .noteContent {
+    flex-grow: 1;
+    padding: $space-2 $space-4;
+    margin-bottom: $space-2;
+
+    .noteTitle {
+      font-weight: $fontWeights-medium;
+      padding-bottom: $space-2;
+    }
+
+    .noteBody {
+      font-size: $fontSizes-sm;
+    }
+
+    .noteDate {
+      flex-shrink: 0;
+      font-size: $fontSizes-xs;
+      color: $colors-gray11;
+      padding-bottom: $space-2;
+    }
+  }
+
+  .noteActions {
+    opacity: 0;
+    transition: opacity 150ms;
+
+    @media (hover: none) {
+      opacity: 1;
+    }
+  }
+
+  &:hover {
+    .noteActions {
+      opacity: 1;
+    }
+  }
+}

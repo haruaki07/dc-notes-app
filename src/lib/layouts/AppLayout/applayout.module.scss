@@ -17,5 +17,12 @@
     padding-top: 64px;
     padding-left: $space-8;
     padding-right: $space-8;
+    margin-left: 60px;
+
+    &.mainContentExpand {
+      @media screen and (min-width: $breakpoints-xs) {
+        margin-left: 280px;
+      }
+    }
   }
 }

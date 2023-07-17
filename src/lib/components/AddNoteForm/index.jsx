@@ -16,16 +16,16 @@ import clsx from "clsx"
 
 /** @extends {React.Component<FormProps, FormState>} */
 class AddNoteForm extends React.Component {
-  /** @type {FormState} */
-  state = {
-    title: "",
-    body: "",
-    expand: false,
-  }
-
   /** @param {FormProps} props */
   constructor(props) {
     super(props)
+
+    /** @type {FormState} */
+    this.state = {
+      title: "",
+      body: "",
+      expand: false,
+    }
   }
 
   handleBlur = (e) => {

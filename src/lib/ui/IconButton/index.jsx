@@ -1,11 +1,35 @@
+import clsx from "clsx"
 import styles from "./iconbutton.module.scss"
 
-/** @type {React.FC<React.PropsWithChildren<React.ComponentProps<"button">>>} */
+const sizeStyle = {
+  sm: styles.iconButtonSm,
+  md: styles.iconButtonMd,
+}
+
+const colorStyle = {
+  default: null,
+  red: styles.iconButtonRed,
+}
+
+/**
+ * @type {React.FC<
+ *   React.PropsWithChildren<
+ *     React.ComponentProps<"button"> & {
+ *       size?: "sm" | "md"
+ *       color?: "red" | "default"
+ *     }
+ *   >
+ * >}
+ */
 const IconButton = (props) => {
-  const { children, ...restProps } = props
+  const { size = "md", color = "default", children, ...restProps } = props
 
   return (
-    <button type="button" className={styles.iconButton} {...restProps}>
+    <button
+      type="button"
+      className={clsx(styles.iconButton, sizeStyle[size], colorStyle[color])}
+      {...restProps}
+    >
       {children}
     </button>
   )

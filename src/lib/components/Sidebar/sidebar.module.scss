@@ -1,27 +1,16 @@
 .sidebarWrapper {
   display: block;
-
-  > div:first-child {
-    flex-shrink: 1;
-    background: transparent;
-    min-width: calc(48px + $space-6);
-    position: relative;
-  }
 }
 
 .sidebarExpanded {
-  > div:first-child {
-    min-width: 280px;
-  }
-
   .sidebar {
     width: 280px;
     padding-left: 0;
 
     .sidebarItem {
       padding: 0 0 0 $space-6;
-      border-top-right-radius: $radii-pill;
-      border-bottom-right-radius: $radii-pill;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
     }
   }
 }
@@ -37,6 +26,7 @@
   padding-top: 8px;
   padding-left: $space-6;
   transition: width 150ms;
+  z-index: $zIndices-4;
 
   .sidebarItem {
     width: 100%;

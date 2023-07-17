@@ -18,8 +18,8 @@ const flexCenterStyle = {
 /**
  * @type {React.FC<
  *   React.PropsWithChildren<
- *     React.ComponentProps<HTMLElement> & {
- *       as?: string;
+ *     React.ComponentProps<"div"> & {
+ *       as?: string
  *       inline?: boolean
  *       gap?: number
  *       direction?: "row" | "row-reverse" | "col" | "col-reverse"
