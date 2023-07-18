@@ -60,11 +60,12 @@ class App extends React.Component {
   }
 
   searchNotes = (keywords = "") => {
+    console.log(keywords)
     return this.state.notes
       .filter((n) => {
         return (
-          n.title.toLowerCase().includes(keywords) ||
-          n.body.toLowerCase().includes(keywords)
+          n.title.toLowerCase().includes(keywords.toLowerCase()) ||
+          n.body.toLowerCase().includes(keywords.toLowerCase())
         )
       })
       .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
