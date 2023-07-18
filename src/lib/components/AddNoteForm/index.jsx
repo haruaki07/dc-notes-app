@@ -3,6 +3,7 @@ import Flex from "@/lib/ui/Flex"
 import styles from "./addnoteform.module.scss"
 import TextField from "@/lib/ui/TextField"
 import clsx from "clsx"
+import { containsElement } from "@/utils/dom"
 
 /**
  * @typedef {{ title: string; body: string }} Values
@@ -17,6 +18,8 @@ import clsx from "clsx"
  *   onAdd: (values: Values) => void
  * }} FormProps
  */
+
+const MAX_TITLE_LEN = 50
 
 /** @extends {React.Component<FormProps, FormState>} */
 class AddNoteForm extends React.Component {
@@ -40,17 +43,24 @@ class AddNoteForm extends React.Component {
     this.setState({ expand: true })
   }
 
+  isDirty = () => {
+    return (
+      this.state.title.trim().length > 0 || this.state.body.trim().length > 0
+    )
+  }
+
   handleFormBlur = (e) => {
-    const { title, body } = this.state
-    const isDirty = title.trim().length > 0 || body.trim().length > 0
-    if (!e.currentTarget.contains(e.relatedTarget) && !isDirty) {
+    console.log(e)
+    if (!containsElement(e.currentTarget, e.relatedTarget) && !this.isDirty()) {
       this.setState({ expand: false })
     }
   }
 
   /** @param {React.SyntheticEvent<HTMLInputElement>} e */
   handleTitleChange = (e) => {
-    this.setState({ title: e.currentTarget.value })
+    const val = e.currentTarget.value
+    // Kriteria Ops. 2 No. 1, 2 (title should not exceed 50 chars)
+    this.setState({ title: val.slice(0, MAX_TITLE_LEN) })
   }
 
   /** @param {React.SyntheticEvent<HTMLTextAreaElement>} e */
@@ -59,8 +69,10 @@ class AddNoteForm extends React.Component {
   }
 
   handleBtnAdd = () => {
-    this.props.onAdd?.({ title: this.state.title, body: this.state.body })
-    this.setState({ title: "", body: "" })
+    if (this.isDirty()) {
+      this.props.onAdd?.({ title: this.state.title, body: this.state.body })
+      this.setState({ title: "", body: "" })
+    }
   }
 
   render() {
@@ -74,15 +86,21 @@ class AddNoteForm extends React.Component {
           onBlur={this.handleFormBlur}
         >
           {expand && (
-            <TextField
-              fullWidth
-              size="lg"
-              variant="transparent"
-              placeholder="Title"
-              className={styles.inputTitle}
-              value={title}
-              onChange={this.handleTitleChange}
-            />
+            <div className={styles.inputTitleWrapper}>
+              <TextField
+                fullWidth
+                size="lg"
+                variant="transparent"
+                placeholder="Title"
+                className={styles.inputTitle}
+                value={title}
+                onChange={this.handleTitleChange}
+              />
+              {/* Kriteria Ops. 2 No. 3 */}
+              <span tabIndex={-1} className={styles.inputTitleLimitText}>
+                {this.state.title.length}/{MAX_TITLE_LEN}
+              </span>
+            </div>
           )}
           <TextField
             fullWidth

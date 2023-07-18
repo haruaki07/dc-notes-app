@@ -39,11 +39,9 @@ const TextField = (props) => {
     onInput,
     ...restProps
   } = props
-  const defaultRows = 2
+  const defaultRows = typeof multiLine === "boolean" ? 2 : multiLine
 
-  const [rows, setRows] = useState(
-    typeof multiLine === "boolean" ? defaultRows : multiLine
-  )
+  const [rows, setRows] = useState(defaultRows)
 
   if (autoGrow && !multiLine)
     throw new Error("[TextField]: autoGrow only works when multiLine enabled!")
@@ -59,8 +57,7 @@ const TextField = (props) => {
       1.5 * parseFloat(computedStyle.fontSize.slice(0, -2)) ?? 14 // hardcoded line-height (1.5x fontsize)
 
     const previousRows = rows
-    e.currentTarget.rows =
-      typeof multiLine === "boolean" ? defaultRows : multiLine // reset rows
+    e.currentTarget.rows = defaultRows // reset rows
 
     const currentRows = ~~(
       (e.currentTarget.scrollHeight - paddingY) /
@@ -84,6 +81,10 @@ const TextField = (props) => {
     onInput?.(e)
     handleAutoGrow(e)
   }
+
+  useEffect(() => {
+    if (!props.value) setRows(defaultRows)
+  }, [props.value])
 
   return (
     <div

@@ -16,16 +16,27 @@
       max-width: 620px;
     }
 
-    .inputTitle {
-      input {
-        font-weight: $fontWeights-medium;
-        padding-left: 0;
-        padding-right: 0;
-        border-radius: 0;
+    .inputTitleWrapper {
+      position: relative;
 
-        &::placeholder {
+      .inputTitle {
+        input {
           font-weight: $fontWeights-medium;
+          padding-left: 0;
+          padding-right: 0;
+          border-radius: 0;
+
+          &::placeholder {
+            font-weight: $fontWeights-medium;
+          }
         }
+      }
+
+      .inputTitleLimitText {
+        position: absolute;
+        font-size: $fontSizes-xs;
+        bottom: 0;
+        right: 0;
       }
     }
 
