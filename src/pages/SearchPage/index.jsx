@@ -1,27 +1,30 @@
-import IconArchive from "@/lib/components/Icons/Archive"
 import NoteList from "@/lib/components/NoteList"
 import Container from "@/lib/ui/Container"
 import Flex from "@/lib/ui/Flex"
-import Heading from "@/lib/ui/Heading"
+import Text from "@/lib/ui/Text"
+import styles from "@/styles/modules/page.module.scss"
 import { dequal } from "dequal"
 import React from "react"
-import styles from "@/styles/modules/page.module.scss"
 
 /**
- * @typedef {{}} State
+ * @typedef {{ notes: import("@/utils").Note[] }} State
  *
  * @typedef {{
- *   notes: import("@/utils").Note[]
  *   onDelete: (id) => void
+ *   onArchive: (id) => void
  *   onUnarchive: (id) => void
  * }} Props
  */
 
 /** @extends {React.Component<Props, State>} */
-class ArchivePage extends React.Component {
+class SearchPage extends React.Component {
   /** @param {Props} props */
   constructor(props) {
     super(props)
+
+    this.state = {
+      notes: props.notes,
+    }
   }
 
   componentDidUpdate(prevProps) {
@@ -37,18 +40,16 @@ class ArchivePage extends React.Component {
       <Flex center="horizontal" direction="col" style={{ height: "100%" }}>
         <Container center style={{ flexGrow: 1, padding: "1rem 0" }}>
           {/* Kriteria 3 No. 2 */}
-          {this.props.notes.length > 0 ? (
+          {this.state.notes.length > 0 ? (
             <NoteList
-              notes={this.props.notes}
+              notes={this.state.notes}
               onDelete={this.props.onDelete}
+              onArchive={this.props.onArchive}
               onUnarchive={this.props.onUnarchive}
             />
           ) : (
-            <Flex center direction="col" className={styles.notesEmpty}>
-              <IconArchive size={128} />
-              <Heading level="3" className={styles.notesEmptyText}>
-                Your archived notes appear here
-              </Heading>
+            <Flex center="horizontal">
+              <Text>Match no result.</Text>
             </Flex>
           )}
         </Container>
@@ -57,4 +58,4 @@ class ArchivePage extends React.Component {
   }
 }
 
-export default ArchivePage
+export default SearchPage

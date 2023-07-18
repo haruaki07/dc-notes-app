@@ -3,6 +3,7 @@ import AppLayout from "./lib/layouts/AppLayout"
 import NotesPage from "./pages/NotesPage"
 import ArchivePage from "./pages/ArchivePage"
 import { getInitialNotes } from "./utils"
+import SearchPage from "./pages/SearchPage"
 
 /** @typedef {{ notes: import("./utils").Note[] }} State */
 
@@ -77,14 +78,24 @@ class App extends React.Component {
       <AppLayout>
         {({ page, keywords }) => {
           const isSearching = keywords.trim().length > 0
-          if (page === "notes" || isSearching) {
+          if (isSearching) {
             return (
-              <NotesPage
-                notes={isSearching ? this.searchNotes(keywords) : activeNotes}
-                onAdd={this.handleAddNote}
+              <SearchPage
+                notes={this.searchNotes(keywords)}
                 onDelete={this.handleDeleteNote}
                 onArchive={this.handleToggleArchive}
                 onUnarchive={this.handleToggleArchive}
+              />
+            )
+          }
+
+          if (page === "notes" || isSearching) {
+            return (
+              <NotesPage
+                notes={activeNotes}
+                onAdd={this.handleAddNote}
+                onDelete={this.handleDeleteNote}
+                onArchive={this.handleToggleArchive}
               />
             )
           } else if (page === "archive") {

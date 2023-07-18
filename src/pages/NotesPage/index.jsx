@@ -5,7 +5,7 @@ import Container from "@/lib/ui/Container"
 import Flex from "@/lib/ui/Flex"
 import Heading from "@/lib/ui/Heading"
 import React from "react"
-import styles from "./notespage.module.scss"
+import styles from "@/styles/modules/page.module.scss"
 import { dequal } from "dequal"
 
 /**
@@ -16,7 +16,6 @@ import { dequal } from "dequal"
  *   onAdd: (values: Pick<import("@/utils").Note, "title" | "body">) => void
  *   onDelete: (id) => void
  *   onArchive: (id) => void
- *   onUnarchive: (id) => void
  * }} Props
  */
 
@@ -50,7 +49,6 @@ class NotesPage extends React.Component {
               notes={this.state.notes}
               onDelete={this.props.onDelete}
               onArchive={this.props.onArchive}
-              onUnarchive={this.props.onUnarchive}
             />
           ) : (
             <Flex center direction="col" className={styles.notesEmpty}>
