@@ -16,6 +16,7 @@ import { dequal } from "dequal"
  *   onAdd: (values: Pick<import("@/utils").Note, "title" | "body">) => void
  *   onDelete: (id) => void
  *   onArchive: (id) => void
+ *   onUnarchive: (id) => void
  * }} Props
  */
 
@@ -49,6 +50,7 @@ class NotesPage extends React.Component {
               notes={this.state.notes}
               onDelete={this.props.onDelete}
               onArchive={this.props.onArchive}
+              onUnarchive={this.props.onUnarchive}
             />
           ) : (
             <Flex center direction="col" className={styles.notesEmpty}>

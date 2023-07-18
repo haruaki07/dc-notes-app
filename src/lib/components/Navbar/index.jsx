@@ -12,9 +12,11 @@ import styles from "./navbar.module.scss"
 /**
  * @type {React.FC<{
  *   onSidebarToggle: (value: boolean) => void
+ *   onSearch: (keywords: string) => void
  * }>}
  */
-const Navbar = ({ onSidebarToggle }) => {
+const Navbar = ({ onSidebarToggle, onSearch }) => {
+  const [keywords, setKeywords] = useState("")
   const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
@@ -24,6 +26,13 @@ const Navbar = ({ onSidebarToggle }) => {
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
+
+  /** @param {React.SyntheticEvent<HTMLInputElement>} e */
+  const handleOnSearch = (e) => {
+    const val = e.currentTarget.value
+    setKeywords(val)
+    onSearch(val)
+  }
 
   return (
     <div className={clsx(styles.navbarRoot, scrolled && styles.scrolled)}>
@@ -37,12 +46,14 @@ const Navbar = ({ onSidebarToggle }) => {
         </a>
       </Flex>
       <TextField
+        fullWidth
+        size="lg"
         type="search"
         placeholder="Search"
-        icon={<IconSearch />}
-        size="lg"
-        fullWidth
         className={styles.navbarSearch}
+        icon={<IconSearch />}
+        value={keywords}
+        onChange={handleOnSearch}
       />
     </div>
   )

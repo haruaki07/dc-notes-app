@@ -48,22 +48,43 @@ class App extends React.Component {
     })
   }
 
-  render() {
-    const activeNotes = this.state.notes
+  getActiveNotes = () => {
+    return this.state.notes
       .filter((n) => !n.archived)
       .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-    const archivedNotes = this.state.notes.filter((n) => n.archived).reverse()
+  }
+
+  getArchivedNotes = () => {
+    return this.state.notes.filter((n) => n.archived).reverse()
+  }
+
+  searchNotes = (keywords = "") => {
+    return this.state.notes
+      .filter((n) => {
+        return (
+          n.title.toLowerCase().includes(keywords) ||
+          n.body.toLowerCase().includes(keywords)
+        )
+      })
+      .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+  }
+
+  render() {
+    const activeNotes = this.getActiveNotes()
+    const archivedNotes = this.getArchivedNotes()
 
     return (
       <AppLayout>
-        {({ page }) => {
-          if (page === "notes") {
+        {({ page, keywords }) => {
+          const isSearching = keywords.trim().length > 0
+          if (page === "notes" || isSearching) {
             return (
               <NotesPage
-                notes={activeNotes}
+                notes={isSearching ? this.searchNotes(keywords) : activeNotes}
                 onAdd={this.handleAddNote}
                 onDelete={this.handleDeleteNote}
                 onArchive={this.handleToggleArchive}
+                onUnarchive={this.handleToggleArchive}
               />
             )
           } else if (page === "archive") {

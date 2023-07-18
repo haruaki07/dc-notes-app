@@ -6,7 +6,11 @@ import styles from "./applayout.module.scss"
 import clsx from "clsx"
 
 /**
- * @typedef {{ sidebarExpand: boolean; page: "notes" | "archive" }} State
+ * @typedef {{
+ *   sidebarExpand: boolean
+ *   page: "notes" | "archive"
+ *   searchKeywords: string
+ * }} State
  *
  * @typedef {React.PropsWithChildren} Props
  */
@@ -17,10 +21,10 @@ class AppLayout extends React.Component {
   constructor(props) {
     super(props)
 
-    /** @type {State} */
     this.state = {
       sidebarExpand: window.innerWidth < 650 ? false : true,
       page: "notes",
+      searchKeywords: "",
     }
   }
 
@@ -31,7 +35,10 @@ class AppLayout extends React.Component {
   render() {
     return (
       <Flex className={styles.root}>
-        <Navbar onSidebarToggle={this.handleToggleSidebar} />
+        <Navbar
+          onSidebarToggle={this.handleToggleSidebar}
+          onSearch={(k) => this.setState({ searchKeywords: k })}
+        />
         <div className={styles.main}>
           <Sidebar
             expand={this.state.sidebarExpand}
@@ -44,7 +51,10 @@ class AppLayout extends React.Component {
               this.state.sidebarExpand && styles.mainContentExpand
             )}
           >
-            {this.props.children({ page: this.state.page })}
+            {this.props.children({
+              page: this.state.page,
+              keywords: this.state.searchKeywords,
+            })}
           </div>
         </div>
       </Flex>
