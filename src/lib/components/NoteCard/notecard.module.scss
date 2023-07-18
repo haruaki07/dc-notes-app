@@ -10,6 +10,7 @@
     flex-grow: 1;
     padding: $space-2 $space-4;
     margin-bottom: $space-2;
+    white-space: pre-wrap;
 
     .noteTitle {
       color: $colors-gray12;

@@ -13,7 +13,9 @@ import { dequal } from "dequal"
  *
  * @typedef {{
  *   notes: import("@/utils").Note[]
- *   onAddNote: (values: Pick<import("@/utils").Note, "title" | "body">) => void
+ *   onAdd: (values: Pick<import("@/utils").Note, "title" | "body">) => void
+ *   onDelete: (id) => void
+ *   onArchive: (id) => void
  * }} Props
  */
 
@@ -39,11 +41,15 @@ class NotesPage extends React.Component {
   render() {
     return (
       <Flex center="horizontal" direction="col" style={{ height: "100%" }}>
-        <AddNoteForm onAdd={this.props.onAddNote} />
+        <AddNoteForm onAdd={this.props.onAdd} />
         <Container center style={{ flexGrow: 1, paddingBottom: "1rem" }}>
           {/* Kriteria 3 No. 3 */}
           {this.state.notes.length > 0 ? (
-            <NoteList notes={this.state.notes} />
+            <NoteList
+              notes={this.state.notes}
+              onDelete={this.props.onDelete}
+              onArchive={this.props.onArchive}
+            />
           ) : (
             <Flex center direction="col" className={styles.notesEmpty}>
               <IconNote size={128} />

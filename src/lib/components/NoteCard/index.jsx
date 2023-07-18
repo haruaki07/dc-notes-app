@@ -8,7 +8,15 @@ import IconArchive from "../Icons/Archive"
 import IconTrash from "../Icons/Trash"
 import IconUnarchive from "../Icons/Unarchive"
 
-/** @type {React.FC<import("@/utils").Note>} */
+/**
+ * @type {React.FC<
+ *   import("@/utils").Note & {
+ *     onDelete: (id) => void
+ *     onArchive: (id) => void
+ *     onUnarchive: (id) => void
+ *   }
+ * >}
+ */
 const NoteCard = (props) => {
   const { id, title, body, archived, createdAt } = props
 
@@ -25,17 +33,30 @@ const NoteCard = (props) => {
       </div>
       <Flex className={styles.noteActions}>
         {/* Kriteria 3 No. 1 */}
-        <IconButton size="sm" title="Delete" color="red">
+        <IconButton
+          size="sm"
+          title="Delete"
+          color="red"
+          onClick={() => props.onDelete(id)}
+        >
           <IconTrash />
         </IconButton>
 
         {/* Kriteria Ops. 3 */}
         {archived ? (
-          <IconButton size="sm" title="Unarchive">
+          <IconButton
+            size="sm"
+            title="Unarchive"
+            onClick={() => props.onUnarchive(id)}
+          >
             <IconUnarchive size={18} />
           </IconButton>
         ) : (
-          <IconButton size="sm" title="Archive">
+          <IconButton
+            size="sm"
+            title="Archive"
+            onClick={() => props.onArchive(id)}
+          >
             <IconArchive size={18} />
           </IconButton>
         )}

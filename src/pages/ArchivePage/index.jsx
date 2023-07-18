@@ -1,18 +1,20 @@
-import IconNote from "@/lib/components/Icons/Note"
+import IconArchive from "@/lib/components/Icons/Archive"
 import NoteList from "@/lib/components/NoteList"
 import Container from "@/lib/ui/Container"
 import Flex from "@/lib/ui/Flex"
 import Heading from "@/lib/ui/Heading"
-import { getInitialNotes } from "@/utils"
+import { dequal } from "dequal"
 import React from "react"
 import styles from "./archivepage.module.scss"
-import IconArchive from "@/lib/components/Icons/Archive"
-import { dequal } from "dequal"
 
 /**
  * @typedef {{}} State
  *
- * @typedef {{ notes: import("@/utils").Note[] }} Props
+ * @typedef {{
+ *   notes: import("@/utils").Note[]
+ *   onDelete: (id) => void
+ *   onUnarchive: (id) => void
+ * }} Props
  */
 
 /** @extends {React.Component<Props, State>} */
@@ -36,7 +38,11 @@ class ArchivePage extends React.Component {
         <Container center style={{ flexGrow: 1, padding: "1rem 0" }}>
           {/* Kriteria 3 No. 3 */}
           {this.props.notes.length > 0 ? (
-            <NoteList notes={this.props.notes} />
+            <NoteList
+              notes={this.props.notes}
+              onDelete={this.props.onDelete}
+              onUnarchive={this.props.onUnarchive}
+            />
           ) : (
             <Flex center direction="col" className={styles.notesEmpty}>
               <IconArchive size={128} />

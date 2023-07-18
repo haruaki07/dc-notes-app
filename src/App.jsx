@@ -23,7 +23,6 @@ class App extends React.Component {
 
   /** @param {Pick<import("./utils").Note, "title" | "body">} value */
   handleAddNote = ({ title, body }) => {
-    console.log("bro")
     const note = {
       id: Date.now().toString(),
       title,
@@ -31,23 +30,49 @@ class App extends React.Component {
       createdAt: new Date().toISOString(),
       archived: false,
     }
-    this.setState({ notes: [note, ...this.state.notes] })
+    this.setState({ notes: [...this.state.notes, note] })
+  }
+
+  handleDeleteNote = (id) => {
+    this.setState({
+      notes: this.state.notes.filter((n) => n.id !== id),
+    })
+  }
+
+  handleToggleArchive = (id) => {
+    this.setState({
+      notes: this.state.notes.map((n) => ({
+        ...n,
+        archived: n.id === id ? !n.archived : n.archived,
+      })),
+    })
   }
 
   render() {
+    const activeNotes = this.state.notes
+      .filter((n) => !n.archived)
+      .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+    const archivedNotes = this.state.notes.filter((n) => n.archived).reverse()
+
     return (
       <AppLayout>
         {({ page }) => {
           if (page === "notes") {
             return (
               <NotesPage
-                notes={this.state.notes.filter((n) => !n.archived)}
-                onAddNote={this.handleAddNote}
+                notes={activeNotes}
+                onAdd={this.handleAddNote}
+                onDelete={this.handleDeleteNote}
+                onArchive={this.handleToggleArchive}
               />
             )
           } else if (page === "archive") {
             return (
-              <ArchivePage notes={this.state.notes.filter((n) => n.archived)} />
+              <ArchivePage
+                notes={archivedNotes}
+                onDelete={this.handleDeleteNote}
+                onUnarchive={this.handleToggleArchive}
+              />
             )
           }
         }}

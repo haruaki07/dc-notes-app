@@ -10,7 +10,12 @@ import { dequal } from "dequal"
  *   columnMinWidth: number
  * }} State
  *
- * @typedef {{ notes: import("@/utils").Note[] }} Props
+ * @typedef {{
+ *   notes: import("@/utils").Note[]
+ *   onDelete: (id) => void
+ *   onArchive: (id) => void
+ *   onUnarchive: (id) => void
+ * }} Props
  */
 
 /** @extends {React.Component<Props, State>} */
@@ -67,7 +72,13 @@ class NoteList extends React.Component {
         colCount={this.state.column}
         // Kriteria 1 No. 3
         items={this.state.notes.map((note) => (
-          <NoteCard key={note.id} {...note} />
+          <NoteCard
+            key={note.id}
+            {...note}
+            onDelete={this.props.onDelete}
+            onArchive={this.props.onArchive}
+            onUnarchive={this.props.onUnarchive}
+          />
         ))}
       ></Masonry>
     )
